@@ -9,10 +9,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.*;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 public interface ProductionOrderRepository extends JpaRepository<ProductionOrder, Long> {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     Optional<ProductionOrder> findByOrderNo(String orderNo);
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     List<ProductionOrder> findAllByOrderByPriorityDescPlannedEndDateAsc();
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select item from ProductionOrder item where item.id = :id")
     Optional<ProductionOrder> findLockedById(@Param("id") Long id);

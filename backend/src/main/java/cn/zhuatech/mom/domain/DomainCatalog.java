@@ -2,21 +2,51 @@
 package cn.zhuatech.mom.domain;
 import org.springframework.stereotype.Component;
 import java.util.*;
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Component
 public class DomainCatalog {
     private final Map<String, WorkflowAction> actions = new LinkedHashMap<>();
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public DomainCatalog() {
         actions.put("RELEASE", new WorkflowAction("RELEASE", "下达生产订单", List.of("草稿"), "已下达", "ADMIN"));
         actions.put("START", new WorkflowAction("START", "确认开工", List.of("已下达"), "生产中", "OPERATOR"));
         actions.put("COMPLETE", new WorkflowAction("COMPLETE", "验收完工", List.of("生产中"), "已完工", "ADMIN"));
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public String systemName() { return "知华科技制造运营管理系统"; }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public String scene() { return "制造主数据、生产订单、排产下达、工序执行、在制品、物料消耗、质量关卡、设备安灯、班次交接、产品追溯与OEE分析"; }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public String initialStatus() { return "草稿"; }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public String partyLabel() { return "工厂/产线/生产订单"; }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public String amountLabel() { return "制造成本"; }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public String quantityLabel() { return "生产数量"; }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public String dueLabel() { return "计划完工日"; }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public List<ModuleDefinition> modules() { return List.of(
             new ModuleDefinition("MASTER_DATA", "制造主数据", "维护工厂、产线、工作中心、工艺路线、班次与计量规则"),
             new ModuleDefinition("PRODUCTION_ORDER", "生产订单", "承接计划订单并控制版本、优先级、批次与交期"),
@@ -30,7 +60,16 @@ public class DomainCatalog {
             new ModuleDefinition("GENEALOGY", "制造追溯", "建立投入批次、工序、设备、人员与产出序列号谱系"),
             new ModuleDefinition("PERFORMANCE", "制造绩效", "分析产量、达成率、一次合格率、损失时间和OEE")
         ); }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public Map<String, WorkflowAction> actions() { return Collections.unmodifiableMap(actions); }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record ModuleDefinition(String code,String name,String description) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record WorkflowAction(String code,String label,List<String> from,String to,String requiredRole) {}
 }

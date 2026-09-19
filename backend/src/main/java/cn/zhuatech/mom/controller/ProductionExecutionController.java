@@ -7,18 +7,30 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @RestController
 @RequestMapping("/api")
 public class ProductionExecutionController {
     private final ProductionExecutionService service;
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public ProductionExecutionController(ProductionExecutionService service) { this.service = service; }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @GetMapping("/execution/summary")
     ApiResponse<ProductionExecutionService.ExecutionSummary> summary() {
         return ApiResponse.ok(service.summary());
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @GetMapping("/execution/orders")
     ApiResponse<List<ProductionExecutionService.OrderView>> list(
             @RequestParam(required = false) String status,
@@ -28,41 +40,62 @@ public class ProductionExecutionController {
         return ApiResponse.ok(service.list(status, plantCode, keyword, exceptionOnly));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @GetMapping("/execution/orders/{id}")
     ApiResponse<ProductionExecutionService.OrderDetail> detail(@PathVariable Long id) {
         return ApiResponse.ok(service.detail(id));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @PostMapping("/execution/orders")
     ApiResponse<ProductionExecutionService.OrderView> create(
             @Valid @RequestBody ProductionExecutionService.CreateOrderRequest request) {
         return ApiResponse.ok(service.create(request));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @PostMapping("/execution/orders/{id}/actions")
     ApiResponse<ProductionExecutionService.OrderView> action(@PathVariable Long id,
             @Valid @RequestBody ProductionExecutionService.ActionRequest request) {
         return ApiResponse.ok(service.action(id, request));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @PostMapping("/execution/orders/{id}/reports")
     ApiResponse<ProductionExecutionService.ReportResult> report(@PathVariable Long id,
             @Valid @RequestBody ProductionExecutionService.ReportRequest request) {
         return ApiResponse.ok(service.report(id, request));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @PutMapping("/admin/execution/orders/{id}/readiness")
     ApiResponse<ProductionExecutionService.OrderView> readiness(@PathVariable Long id,
             @Valid @RequestBody ProductionExecutionService.ReadinessRequest request) {
         return ApiResponse.ok(service.updateReadiness(id, request));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @PostMapping("/admin/execution/orders/{id}/release")
     ApiResponse<ProductionExecutionService.OrderView> release(@PathVariable Long id,
             @Valid @RequestBody ProductionExecutionService.RemarkRequest request) {
         return ApiResponse.ok(service.release(id, request));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @PostMapping("/admin/execution/orders/{id}/complete")
     ApiResponse<ProductionExecutionService.OrderView> complete(@PathVariable Long id,
             @Valid @RequestBody ProductionExecutionService.RemarkRequest request) {

@@ -17,11 +17,17 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class ProductionExecutionApiTests {
     @Autowired MockMvc mvc;
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test
     void productionOrderSupportsControlledEndToEndExecutionAndIdempotentReporting() throws Exception {
         long id = create("MO-TEST-E2E-001", 100);
@@ -102,6 +108,9 @@ class ProductionExecutionApiTests {
             .andExpect(jsonPath("$.data.order.firstPassYield").value(95.0));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test
     void releaseOverreportAndAndonSafetyRulesAreEnforced() throws Exception {
         long id = create("MO-TEST-SAFE-001", 20);
@@ -176,6 +185,9 @@ class ProductionExecutionApiTests {
             .andExpect(status().isConflict());
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test
     void executionCockpitSupportsSummarySearchAndExceptionFiltering() throws Exception {
         mvc.perform(get("/api/execution/summary").with(httpBasic("operator", "operator123")))
@@ -188,6 +200,9 @@ class ProductionExecutionApiTests {
             .andExpect(jsonPath("$.data").isArray());
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private long create(String orderNo, int quantity) throws Exception {
         MvcResult result = mvc.perform(post("/api/execution/orders")
                 .with(httpBasic("operator", "operator123"))
@@ -204,6 +219,9 @@ class ProductionExecutionApiTests {
         return Long.parseLong(matcher.group(1));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private ResultActions action(long id, String action, String remark) throws Exception {
         return mvc.perform(post("/api/execution/orders/{id}/actions", id)
             .with(httpBasic("operator", "operator123"))
@@ -211,6 +229,9 @@ class ProductionExecutionApiTests {
             .content("{\"action\":\"%s\",\"remark\":\"%s\"}".formatted(action, remark)));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private String readiness(boolean material, boolean quality, boolean andon, String note) {
         return "{\"materialReady\":%s,\"qualityReleased\":%s,\"andonOpen\":%s,\"note\":\"%s\"}"
             .formatted(material, quality, andon, note);

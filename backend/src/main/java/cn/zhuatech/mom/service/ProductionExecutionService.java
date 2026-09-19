@@ -12,6 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.*;
 import java.util.*;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class ProductionExecutionService {
     private static final Set<String> ACTIVE_STATES = Set.of("RELEASED", "IN_PROGRESS", "PAUSED");
@@ -19,6 +22,9 @@ public class ProductionExecutionService {
     private final ProductionEventRepository events;
     private final AuditLogRepository audits;
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public ProductionExecutionService(ProductionOrderRepository orders, ProductionEventRepository events,
             AuditLogRepository audits) {
         this.orders = orders;
@@ -26,6 +32,9 @@ public class ProductionExecutionService {
         this.audits = audits;
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public List<OrderView> list(String status, String plantCode, String keyword, Boolean exceptionOnly) {
         String term = keyword == null ? "" : keyword.trim().toLowerCase(Locale.ROOT);
         return orders.findAllByOrderByPriorityDescPlannedEndDateAsc().stream()
@@ -38,11 +47,17 @@ public class ProductionExecutionService {
             .map(this::view).toList();
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public OrderDetail detail(Long id) {
         ProductionOrder item = get(id);
         return new OrderDetail(view(item), events.findByProductionOrderIdOrderByOccurredAtDesc(id));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public ExecutionSummary summary() {
         List<ProductionOrder> all = orders.findAll();
         int planned = all.stream().mapToInt(ProductionOrder::getPlannedQuantity).sum();
@@ -57,6 +72,9 @@ public class ProductionExecutionService {
                 Math.round(fpy * 10d) / 10d);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Transactional
     public OrderView create(CreateOrderRequest request) {
         if (request.plannedEndDate().isBefore(request.plannedStartDate())) {
@@ -70,6 +88,9 @@ public class ProductionExecutionService {
         return view(item);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Transactional
     public OrderView updateReadiness(Long id, ReadinessRequest request) {
         ProductionOrder item = getLocked(id);
@@ -82,6 +103,9 @@ public class ProductionExecutionService {
         return view(item);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Transactional
     public OrderView release(Long id, RemarkRequest request) {
         ProductionOrder item = getLocked(id);
@@ -92,6 +116,9 @@ public class ProductionExecutionService {
         return view(item);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Transactional
     public OrderView action(Long id, ActionRequest request) {
         ProductionOrder item = getLocked(id);
@@ -116,6 +143,9 @@ public class ProductionExecutionService {
         return view(item);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Transactional
     public ReportResult report(Long id, ReportRequest request) {
         ProductionOrder item = getLocked(id);
@@ -141,6 +171,9 @@ public class ProductionExecutionService {
         return new ReportResult(view(item), event, false);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Transactional
     public OrderView complete(Long id, RemarkRequest request) {
         ProductionOrder item = getLocked(id);
@@ -155,6 +188,9 @@ public class ProductionExecutionService {
         return view(item);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private OrderView view(ProductionOrder item) {
         int accounted = item.accountedQuantity();
         double completion = item.getPlannedQuantity() == 0 ? 0d : accounted * 100d / item.getPlannedQuantity();
@@ -168,33 +204,75 @@ public class ProductionExecutionService {
                 Math.round(fpy * 10d) / 10d, List.copyOf(blockers));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private boolean exceptionOf(ProductionOrder item) { return !view(item).blockers().isEmpty(); }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private ProductionOrder get(Long id) { return orders.findById(id)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "生产订单不存在")); }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private ProductionOrder getLocked(Long id) { return orders.findLockedById(id)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "生产订单不存在")); }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private void requireState(ProductionOrder item, String expected, String message) {
         if (!expected.equals(item.getStatus())) throw conflict(message);
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private String operator() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication == null ? "system" : authentication.getName();
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private void audit(String action, ProductionOrder item, String detail) {
         audits.save(new AuditLog("PRODUCTION_EXECUTION", action, item.getOrderNo(), operator(),
                 detail == null ? "" : detail));
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private boolean blank(String value) { return value == null || value.isBlank(); }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private ResponseStatusException conflict(String message) { return new ResponseStatusException(HttpStatus.CONFLICT, message); }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private ResponseStatusException bad(String message) { return new ResponseStatusException(HttpStatus.BAD_REQUEST, message); }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record OrderView(ProductionOrder order, int accountedQuantity, double completionRate,
             double firstPassYield, List<String> blockers) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record OrderDetail(OrderView order, List<ProductionEvent> events) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record ReportResult(OrderView order, ProductionEvent event, boolean duplicate) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record ExecutionSummary(long totalOrders, long activeOrders, long blockedOrders, long overdueOrders,
             int plannedQuantity, int goodQuantity, int scrapQuantity, double firstPassYield) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record CreateOrderRequest(
             @NotBlank @Size(max = 40) String orderNo,
             @NotBlank @Size(max = 40) String productCode,
@@ -206,10 +284,22 @@ public class ProductionExecutionService {
             @NotNull LocalDate plannedStartDate,
             @NotNull LocalDate plannedEndDate) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record ReadinessRequest(boolean materialReady, boolean qualityReleased, boolean andonOpen,
             @NotBlank @Size(max = 300) String note) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record RemarkRequest(@NotBlank @Size(max = 300) String remark) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record ActionRequest(@NotBlank String action, @NotBlank @Size(max = 300) String remark) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record ReportRequest(
             @NotBlank @Size(max = 80) String eventKey,
             @PositiveOrZero int goodQuantity,

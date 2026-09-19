@@ -5,7 +5,16 @@ import cn.zhuatech.mom.model.ProductionEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.*;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 public interface ProductionEventRepository extends JpaRepository<ProductionEvent, Long> {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     Optional<ProductionEvent> findByEventKey(String eventKey);
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     List<ProductionEvent> findByProductionOrderIdOrderByOccurredAtDesc(Long productionOrderId);
 }
